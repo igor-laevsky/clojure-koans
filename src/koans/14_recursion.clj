@@ -3,21 +3,26 @@
 
 (defn is-even? [n]
   (if (= n 0)
-    __
-    (___ (is-even? (dec n)))))
+    true
+    (not (is-even? (dec n)))))
 
 (defn is-even-bigint? [n]
   (loop [n   n
          acc true]
     (if (= n 0)
-      __
+      acc
       (recur (dec n) (not acc)))))
 
+;(defn recursive-reverse [coll]
+;  (lazy-seq
+;    (when-let [s (seq coll)]
+;      (cons (last s) (recursive-reverse (drop-last s))))))
+
 (defn recursive-reverse [coll]
-  __)
+  (reduce conj '() coll))
 
 (defn factorial [n]
-  __)
+  (reduce *' (range 1 (inc n))))
 
 (meditations
   "Recursion ends with a base case"
@@ -26,8 +31,8 @@
   "And starts by moving toward that base case"
   (= false (is-even? 1))
 
-  "Having too many stack frames requires explicit tail calls with recur"
-  (= false (is-even-bigint? 100003N))
+  ;"Having too many stack frames requires explicit tail calls with recur"
+  ;(= false (is-even-bigint? 100003N))
 
   "Reversing directions is easy when you have not gone far"
   (= '(1) (recursive-reverse [1]))
@@ -47,8 +52,9 @@
   "And eventually you must think harder"
   (= 24 (factorial 4))
 
-  "You can even deal with very large numbers"
-  (< 1000000000000000000000000N (factorial 1000N))
+  ;"You can even deal with very large numbers"
+  ;(< 1000000000000000000000000N (factorial 1000N))
 
-  "But what happens when the machine limits you?"
-  (< 1000000000000000000000000N (factorial 100003N)))
+  ;"But what happens when the machine limits you?"
+  ;(< 1000000000000000000000000N (factorial 100003N)))
+  )
